@@ -150,7 +150,7 @@ module SilverwebRealestate
             query: query_string,
             limit: "100"
             }
-        rescue err
+        rescue Exception => err
           puts("failed with:")
           puts(err.inspect)
         end
