@@ -4,7 +4,7 @@ module SilverwebRealestate
     require 'rets'
             
     config.to_prepare do
-      SilverwebRealestate::Config.flexmls_initialize
+#      SilverwebRealestate::Config.flexmls_initialize
 
 #      Dir.glob(Rails.root + "app/decorators/**/*_decorator*.rb").each do |c|
 #        require_dependency(c)
