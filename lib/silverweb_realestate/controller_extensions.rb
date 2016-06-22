@@ -53,8 +53,9 @@ module SilverwebEcom
           puts("in show properties...")
           
           session[:mainnav_status] = false
+          @page_name = params["page_name"]
           #          session[:last_catetory] = request.env['REQUEST_URI']
-          #          @page_name=Menu.find(session[:parent_menu_id]).name rescue ""
+          # @page_name = Menu.find(session[:parent_menu_id]).name rescue params[:current_page]
           #          @page_info = Page.where(:title => params[:page_name]).first || ""
           #          puts("---------the page=> #{@page_info.inspect}")
           #          @products_per_page = Settings.products_per_page.to_i || 8
