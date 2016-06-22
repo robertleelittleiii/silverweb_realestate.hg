@@ -1,0 +1,66 @@
+<%#
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+%>
+
+<%= "index.html" %>
+
+
+<%= @properties.count rescue 0 %>
+
+<br>
+
+<%= @properties.each do |property| %>
+  <div id="property=<%=property.get_value("MLS Identifier")%> ">
+      <div class="property-title">
+          <%=property.get_value("Street Name")%> <%=property.get_value("Street Suffix")%>, <%=property.get_value("Postal City")%> <%=property.get_value("State")%> <%=property.get_value("Zip Code")%>
+      </div>
+      <div class="property-images">
+      </div>
+      <div class="property-info-block">
+          Bedrooms: <%=property.get_value("Bedrooms")%><br>
+          Bathrooms:  <%=property.get_value("Total Baths")%> (Full: <%=property.get_value("Full Baths")%>, Half:<%=property.get_value("Half Baths")%>)<br>
+          Sq. Ft: <%=property.get_value("Apx SqFt")%><br>
+
+      </div>
+  </div>
+
+  <%# @flex_mls_link.photos(property.get_value("List Number Main")).each do |photo| %>
+    <%#=image_tag photo.headers["location"] %>
+  <%# end %>
+
+  <%# property.photos.each do |photo|  %>
+    <%#= photo.inspect %>
+    <%#=image_tag photo.headers["location"] %>
+  <%# end %> 
+
+      <%=show_flexslider_carousel(property)%>
+
+
+  <% property.listing_data.each do |key, value| %>
+    <% if !value.blank? then %>
+      "<%=key %>" = "<%= value %>" <br>
+    <% end %>
+  <% end %>
+
+      
+<%  end %>
+<%#= @properties.each do |property| %>
+<%#*<div id="property=<%=property["LIST_3"] %> ">%>
+<%#*<div class="property-title">%>
+<%#=property[@meta_lookup.key("House Number")]%> <%#=property[@meta_lookup.key("Street Name")]%> <%##=property[@meta_lookup.key("Postal City")]%> <%#=property[@meta_lookup.key("State")]%> <%#=property[@meta_lookup.key("Zip Code")]%>
+<%#*</div>%>
+<%#*</div>%>
+
+<%# @flex_mls_link.photos(property["LIST_3"]).each do |photo| %>
+<%#=image_tag photo.headers["location"] %>
+<%# end %>
+
+<%# property.each do |key, value| %>
+<%# if !value.blank? then %>
+<%#*"<%=key %>" = "<%#= value %>" ---==(<%#=@full_lookup[@meta_lookup[key]][value] rescue "Fail"%>)==--- <%#= @meta_lookup[key] %> ==> <%#=@flex_mls_link.get_value(@meta_lookup[key.to_s].to_s,value) %> <br>%>
+<%# end %>
+<%# end %>
+
+<%#  end %>

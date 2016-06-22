@@ -1,0 +1,24 @@
+<script>
+  require("menus/show_properties_type");
+  menus_show_properties_type_callDocumentReady();
+</script>
+
+
+<div class="realestate-show-properties-menu">
+    <p>
+        <b>Property Search Type:</b><br>
+        <%=ajax_select("re_search_type","menu",@menu, SilverwebRealestate::Config.FLEXMLS_SEARCH_TYPES)%>
+    </p>
+
+    <p>
+        <b>Property Search Class</b><br>
+        <%=ajax_select("re_search_class","menu",@menu, SilverwebRealestate::Config.FLEXMLS_SEARCH_CLASSES)%>
+    </p>
+    <p>
+        <b>Search Parameters:</b><br>
+        <%=editablefieldcreate("re_search_param", @menu)%>
+<%#=ajax_select("re_search_param","menu",@menu, @page_list)%>
+    </p>
+
+
+</div>
