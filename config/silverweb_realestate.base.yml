@@ -1,0 +1,19 @@
+common: &COMMON
+  url: 
+  username: 
+  password: 
+  
+development:
+  <<: *COMMON
+
+test: &TEST
+  <<: *COMMON
+
+production:
+  <<: *COMMON
+
+cucumber:
+  <<: *TEST
+
+staging:
+  <<: *TEST

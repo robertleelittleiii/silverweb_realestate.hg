@@ -1,0 +1,55 @@
+
+<div class="hidden-item">
+    <div id="slider-effect">slide</div>
+    <div id="play_speed">0</div>
+    <div id="slider-auto">false</div>
+    <div id="slider-width">200</div>
+    <div id="slider-height">200</div>
+    <div id="slider-nav">true</div>
+
+</div>
+<div id="page-display-page">
+    <div id="page-body-page">
+        <div class="property-list">
+            <% if @properties!=nil then %>
+              <% @properties.each do |property| %>
+                <div class="property-item" id="property-<%=property.get_value("MLS Identifier")%> ">
+                    <div class="property-title">
+                        <%=property.get_value("Street Name")%> <%=property.get_value("Street Suffix")%>, <%=property.get_value("Postal City")%> <%=property.get_value("State")%> <%=property.get_value("Zip Code")%>
+                    </div>
+                    <div class="property-images">
+                        <%=show_flexslider_carousel(property)%>
+
+                    </div>
+                    <div class="property-info-block">
+                        Bedrooms: <%=property.get_value("Bedrooms")%><br>
+                        Bathrooms:  <%=property.get_value("Total Baths")%> (Full: <%=property.get_value("Full Baths")%>, Half:<%=property.get_value("Half Baths")%>)<br>
+                        Sq. Ft: <%=property.get_value("Apx SqFt")%><br>
+
+                    </div>
+                </div>
+
+    <%# @flex_mls_link.photos(property.get_value("List Number Main")).each do |photo| %>
+    <%#=image_tag photo.headers["location"] %>
+    <%# end %>
+
+    <%# property.photos.each do |photo|  %>
+    <%#= photo.inspect %>
+    <%#=image_tag photo.headers["location"] %>
+    <%# end %> 
+
+
+
+    <%# property.listing_data.each do |key, value| %>
+    <%# if !value.blank? then %>
+    <%#*"<%=key % >" = "<%#= value % >" <br>%>
+    <%# end %>
+    <%# end %>
+
+
+              <%  end %>
+            <% end %>
+
+        </div>
+    </div>
+</div>
