@@ -52,7 +52,7 @@ def menu_show_properties(menuItem, html_options, span_options, class_options=nil
    #   template_name = !menuItem.rawhtml.to_s.blank? ? "show_products-"+menuItem.rawhtml.to_s : ""
      page_name  =  !menuItem.page.blank? ?  menuItem.page.title.to_s : menuItem.name
      
-      class_options.merge!({:controller=>:site, :action=>:show_properties, :search_by=>search_type, :search_term=>search_param, :search_class=>search_class, :page_name=>page_name}) #:template=>template_name, 
+      class_options.merge!({:controller=>:site, :action=>:show_properties, :search_by=>search_type, :search_term=>search_param,:menu_id=>menuItem, :search_class=>search_class, :page_name=>page_name}) #:template=>template_name, 
 
 #      case menuItem.rawhtml
 #          

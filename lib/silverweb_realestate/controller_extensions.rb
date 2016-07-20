@@ -52,6 +52,8 @@ module SilverwebEcom
         def show_properties
           puts("in show properties...")
           
+          @page = Menu.find(params[:menu_id]).page rescue nil
+          
           session[:mainnav_status] = false
           @page_name = params["page_name"]
           #          session[:last_catetory] = request.env['REQUEST_URI']

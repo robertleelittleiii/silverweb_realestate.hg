@@ -76,13 +76,14 @@ module SilverwebRealestate
     def self.build_lookup_hash(lookup_name)
       # lookup_hash = Hash[@client.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("long_name")==lookup_name}[0].instance_eval("lookup_types").collect {|x| [x.instance_eval("value"),x.instance_eval("long_value")] }]
     # was for only class A -->  lookup_hash =Hash[@FLEXMLS_WEBSERVICE_CONNECTION.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("long_name")==lookup_name}.each{|x| x.instance_eval("lookup_types").collect {|x| [x.instance_eval("value"),x.instance_eval("long_value")] } }.collect{|x| x.instance_eval("lookup_types")}.collect{|y| (y.collect{|x| [x.instance_eval("value"),x.instance_eval("long_value")]})}.flatten(1)]
-     lookup_hash =Hash[@FLEXMLS_WEBSERVICE_CONNECTION.metadata.tree["property"].instance_eval("rets_classes").collect{|prop_classes| prop_classes.instance_eval("tables").select {|a| a.instance_eval("long_name")==lookup_name}.each{|x| x.instance_eval("lookup_types").collect {|x| [x.instance_eval("value"),x.instance_eval("long_value")] } }.collect{|x| x.instance_eval("lookup_types")}.collect{|y| (y.collect{|x| [x.instance_eval("value"),x.instance_eval("long_value")]})}.flatten(1)}.flatten(1)]
+     lookup_hash =Hash[@FLEXMLS_WEBSERVICE_CONNECTION.metadata.tree["property"].instance_eval("rets_classes").collect{|prop_classes| prop_classes.instance_eval("tables").select {|a| a.instance_eval("long_name")==lookup_name}.each{|x| x.instance_eval("lookup_types").collect {|x| [x.instance_eval("value"),x.instance_eval("long_value")] } }.collect{|x| x.instance_eval("lookup_types")}.collect{|y| (y.collect{|x| [x.instance_eval("value"),x.instance_eval("long_value")]})}.flatten(1)}.flatten(1)] rescue {}
      return_lookup = Hash[ lookup_name => lookup_hash ]
     
     end
   
     def self.flexmls_get_lookup_table_names
-      return @FLEXMLS_WEBSERVICE_CONNECTION.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("table_fragment")["Interpretation"]=="Lookup"}.collect{|a| a.instance_eval("long_name")} #+ 
+      return @FLEXMLS_META_CACHE.values
+      # =>  return @FLEXMLS_WEBSERVICE_CONNECTION.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("table_fragment")["Interpretation"]=="Lookup"}.collect{|a| a.instance_eval("long_name")} #+ 
      #   @FLEXMLS_WEBSERVICE_CONNECTION.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("table_fragment")["Interpretation"]=="LookupMulti"}.collect{|a| a.instance_eval("long_name")}
     end
     
@@ -131,6 +132,10 @@ module SilverwebRealestate
 #      @FLEXMLS_LOOKUP_CACHE.merge!(build_lookup_hash("Style"))
 #      @FLEXMLS_LOOKUP_CACHE.merge!(build_lookup_hash("Water Heater"))
 #      @FLEXMLS_LOOKUP_CACHE.merge!(build_lookup_hash("Water/Sewer"))
+#      @FLEXMLS_LOOKUP_CACHE.merge!(build_lookup_hash("Farm Assessed"))
+#      @FLEXMLS_LOOKUP_CACHE.merge!(build_lookup_hash("Special Assessment"))
+#      @FLEXMLS_LOOKUP_CACHE.merge!(build_lookup_hash("Sub-Type"))
+#      
     end
     
     def self.flexmls_login(username, password, host_url)
