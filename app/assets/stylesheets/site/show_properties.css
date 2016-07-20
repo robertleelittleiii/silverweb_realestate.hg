@@ -12,7 +12,14 @@ and open the template in the editor.
 */
 
 div.property-item {
-    width:100%;
+    width: 100%;
+    background-color: white;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 20px;
+    border: 2px #1d2763 solid;
+    border-radius: 10px 10px 10px 10px;
+    padding-bottom: 5px;
 }
 
 div#flexslider {
@@ -30,20 +37,61 @@ div.property-info-block {
 }
 
 div.property-images {
-    width: 50%;
     display: inline-block;
+    margin-top: 7px;
+    margin-left: 7px;
+    border: 1px black solid;
+    border-radius: 5px;
 }
 
-
 div.property-title {
-    width: 100%;
-    padding: 20px;
-    color: #223982;
-    font-size: 25px;
+    padding: 7px;
+    color: white;
+    font-size: 20px;
+    background-color: #1d2763;
 }
 
 .flexslider .slides img {
     height: auto;
     position: relative;
     display: inline-block;
+}
+
+div.map-space {
+    width: 100%;
+    height: 400px;
+    position: relative;
+}
+
+div.map-missing {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background: gray;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 50px;
+    display: inline-block;
+}
+
+div.property-tabs {
+    width: 48%;
+    display: inline-block;
+    position: relative;
+    min-height: 420px;
+    vertical-align: top;
+    float: right;
+    margin-top: 7px;
+    margin-right: 7px;
+}
+
+div.property-list {
+    margin-top: 10px;
+}
+
+div.flex-viewport {
+    max-height: 375px;
 }

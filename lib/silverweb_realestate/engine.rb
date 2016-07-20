@@ -2,7 +2,8 @@ module SilverwebRealestate
   class Engine < ::Rails::Engine
     
     require 'rets'
-            
+    require 'gmaps4rails'   
+    
     config.to_prepare do
 #      SilverwebRealestate::Config.flexmls_initialize
 

@@ -180,119 +180,119 @@ class Property
   
   def self.find_by_office(office_id, search_class, limit=100)
     
-                properties = SilverwebRealestate::Config.flex_mls_search_properties("(LIST_106=\"#{office_id}\" )",search_class)[0..limit]
+    properties = SilverwebRealestate::Config.flex_mls_search_properties("(LIST_106=\"#{office_id}\" )",search_class)[0..limit]
 
-#    begin
-#      properties= @client.find :all, {
-#        search_type: 'Property',
-#        class: search_class,
-#          limit: limit.to_s,
-#          query: "(LIST_106=\"#{office_id}\" )",
-#        }
-#      rescue
-#        return []
-#      end
+    #    begin
+    #      properties= @client.find :all, {
+    #        search_type: 'Property',
+    #        class: search_class,
+    #          limit: limit.to_s,
+    #          query: "(LIST_106=\"#{office_id}\" )",
+    #        }
+    #      rescue
+    #        return []
+    #      end
         
-      return make_property_array(properties)
+    return make_property_array(properties)
      
-    end
+  end
   
-    def self.make_property_array(given_array)
-      return given_array.collect{|each| PropertyItem.new(each)}
-    end
+  def self.make_property_array(given_array)
+    return given_array.collect{|each| PropertyItem.new(each)}
+  end
     
-    def self.find_by_realtor(realtor_id, search_class, limit=100)
+  def self.find_by_realtor(realtor_id, search_class, limit=100)
     
-      properties = SilverwebRealestate::Config.flex_mls_search_properties("(LIST_5=\"#{realtor_id}\" )",search_class)[0..limit]
+    properties = SilverwebRealestate::Config.flex_mls_search_properties("(LIST_5=\"#{realtor_id}\" )",search_class)[0..limit]
       
-      #        puts("*********** properties ************ ")
-      #        puts("class: #{properties.class}")
-      #        puts("inspect: ") 
-      #        puts(properties.inspect)
-      #        puts("cache:")
-      #        puts(SilverwebRealestate::Config.FLEXMLS_QUERY_CACHE)
-      #        puts("*********** properties ************ ")
+    #        puts("*********** properties ************ ")
+    #        puts("class: #{properties.class}")
+    #        puts("inspect: ") 
+    #        puts(properties.inspect)
+    #        puts("cache:")
+    #        puts(SilverwebRealestate::Config.FLEXMLS_QUERY_CACHE)
+    #        puts("*********** properties ************ ")
 
-      #      begin
-      #        properties = @client.find :all, {
-      #          search_type: 'Property',
-      #          class: 'A',
-      #            query: "(LIST_5=\"#{realtor_id}\" )",
-      #            limit: limit.to_s
-      #          }
-      #
-      #        rescue
-      #          return []
-      #        end
+    #      begin
+    #        properties = @client.find :all, {
+    #          search_type: 'Property',
+    #          class: 'A',
+    #            query: "(LIST_5=\"#{realtor_id}\" )",
+    #            limit: limit.to_s
+    #          }
+    #
+    #        rescue
+    #          return []
+    #        end
         
-      return make_property_array(properties)
+    return make_property_array(properties)
         
 
-    end
+  end
   
-    def self.find_by_municipality(municipality_id, search_class, limit=100)
+  def self.find_by_municipality(municipality_id, search_class, limit=100)
       
-            properties = SilverwebRealestate::Config.flex_mls_search_properties("(LIST_29=#{municipality_id})",search_class)[0..limit]
+    properties = SilverwebRealestate::Config.flex_mls_search_properties("(LIST_29=#{municipality_id})",search_class)[0..limit]
 
-#      begin
-#        properties = client.find :all, {
-#          search_type: 'Property',
-#          class: search_class,
-#            query: "(LIST_29=#{municipality_id})",
-#            limit: limit.to_s
-#          }
-#        rescue
-#          return []
-#        end
-#        
-#        # return properties
-#          
-        return make_property_array(properties)
+    #      begin
+    #        properties = client.find :all, {
+    #          search_type: 'Property',
+    #          class: search_class,
+    #            query: "(LIST_29=#{municipality_id})",
+    #            limit: limit.to_s
+    #          }
+    #        rescue
+    #          return []
+    #        end
+    #        
+    #        # return properties
+    #          
+    return make_property_array(properties)
 
-      end
+  end
     
-#      def find(property_id)
-#        begin
-#          property = client.find :first, {
-#            search_type: 'Property',
-#            class: 'A',
-#              query: "(LIST_0=#{property_id})",
-#              limit:1
-#            }
-#          rescue
-#            return []
-#          end
-#        
-#          return property
-#        end
-#      
-        def self.municipality_list() 
-          @client = Rets::Client.new({
-              login_url: 'http://retsgw.flexmls.com/rets2_2/Login',
-              username: 'mo.rets.Silverweb',
-              password: 'taxed-acean54',
-              version: 'RETS/1.5'
-            })
-          @client.login
+  #      def find(property_id)
+  #        begin
+  #          property = client.find :first, {
+  #            search_type: 'Property',
+  #            class: 'A',
+  #              query: "(LIST_0=#{property_id})",
+  #              limit:1
+  #            }
+  #          rescue
+  #            return []
+  #          end
+  #        
+  #          return property
+  #        end
+  #      
+  def self.municipality_list() 
+    @client = Rets::Client.new({
+        login_url: 'http://retsgw.flexmls.com/rets2_2/Login',
+        username: 'mo.rets.Silverweb',
+        password: 'taxed-acean54',
+        version: 'RETS/1.5'
+      })
+    @client.login
     
-          return_value = @client.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("long_name")=="Municipality"}[0].instance_eval("lookup_types").collect {|x| [x.instance_eval("long_value"),x.instance_eval("value")] } 
-          @client.logout
+    return_value = @client.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("long_name")=="Municipality"}[0].instance_eval("lookup_types").collect {|x| [x.instance_eval("long_value"),x.instance_eval("value")] } 
+    @client.logout
 
-          return return_value
-        end
+    return return_value
+  end
       
-        def self.search_municipality(municipality_name)
-          @client = Rets::Client.new({
-              login_url: 'http://retsgw.flexmls.com/rets2_2/Login',
-              username: 'mo.rets.Silverweb',
-              password: 'taxed-acean54',
-              version: 'RETS/1.5'
-            })
-          @client.login
+  def self.search_municipality(municipality_name)
+    @client = Rets::Client.new({
+        login_url: 'http://retsgw.flexmls.com/rets2_2/Login',
+        username: 'mo.rets.Silverweb',
+        password: 'taxed-acean54',
+        version: 'RETS/1.5'
+      })
+    @client.login
     
-          return_value =   @client.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("long_name")=="Municipality"}[0].instance_eval("lookup_types").select {|a| a.instance_eval("long_value")==municipality_name}.first.instance_eval("value")
-          @client.logout
-          return return_value
-        end
+    return_value =   @client.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("long_name")=="Municipality"}[0].instance_eval("lookup_types").select {|a| a.instance_eval("long_value")==municipality_name}.first.instance_eval("value")
+    @client.logout
+    return return_value
+  end
    
-      end
+end

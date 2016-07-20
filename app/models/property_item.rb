@@ -46,6 +46,14 @@ class PropertyItem
     return return_values
   end
   
+    
+  def get_location
+    return {} if get_value("Longitude").blank? 
+   
+      location_hash = {:lng=>get_value("Longitude"),:lat=>get_value("Latitude")}
+        
+    return location_hash
+  end
   
   def listing_data
     @listing_data
