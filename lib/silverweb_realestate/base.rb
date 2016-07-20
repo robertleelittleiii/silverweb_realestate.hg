@@ -8,6 +8,8 @@ module SilverwebRealestate
 
     @FLEXMLS_SEARCH_TYPES = ["office","realtor","municipality"]
       
+    @GOOGE_MAPS_API_KEY  = ""
+    
     def self.FLEXMLS_SEARCH_TYPES
       @FLEXMLS_SEARCH_TYPES
     end
@@ -53,6 +55,14 @@ module SilverwebRealestate
  #     @FLEXMLS_META_CACHE = Hash[@FLEXMLS_WEBSERVICE_CONNECTION.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").collect {|x| [x.instance_eval("name"),x.instance_eval("long_name")] }]
       @FLEXMLS_META_CACHE = Hash[@FLEXMLS_WEBSERVICE_CONNECTION.metadata.tree["property"].instance_eval("rets_classes").collect{|meta_types| meta_types.instance_eval("tables").collect {|x| [x.instance_eval("name"),x.instance_eval("long_name")] }}.flatten(1)]
    end
+   
+    def self.google_maps_api_key=(value)
+      @GOOGE_MAPS_API_KEY = value
+    end
+
+    def self.google_maps_api_key
+      @GOOGE_MAPS_API_KEY
+    end
     
     def self.build_lookup_multi_hash(lookup_name)
       # lookup_hash = Hash[@client.metadata.tree["property"].instance_eval("rets_classes")[0].instance_eval("tables").select {|a| a.instance_eval("long_name")==lookup_name}[0].instance_eval("lookup_types").collect {|x| [x.instance_eval("value"),x.instance_eval("long_value")] }]

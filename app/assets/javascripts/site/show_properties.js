@@ -5,7 +5,7 @@
  */
 
 var show_properties_callDocumentReady_called = false;
-
+var handler = [];
 
 $(document).ready(function () {
     if (!show_properties_callDocumentReady_called)
@@ -33,6 +33,65 @@ function show_properties_callDocumentReady()
 //        $("body").append($canvas);
 //        removeBlanks(this.width, this.height);
 //    });
+
+    initialize_maps();
+
+    $("div.property-tabs").tabs({
+        "show": function (event, ui) {
+            //      console.log($(this).attr("class"));
+            // google.maps.event.trigger(handler[0].getMap(), 'resize');
+
+
+        },
+        activate: function (event, ui) {
+            var prop_index = $(this).attr("data-property-index");
+            if ($(this).find("div.gm-style").length > 0) {
+                google.maps.event.trigger(handler[prop_index].getMap(), 'resize');
+                handler[prop_index].fitMapToBounds();
+                handler[prop_index].getMap().setZoom(15);
+
+                //               console.log($(this).attr("class"));
+
+                //             console.log($(this));
+            }
+        }
+    });
+
+}
+
+function initialize_maps() {
+    var pageMaps = $("div.map-space");
+    // var handler = [];
+    $(pageMaps).each(function (index) {
+        console.log($(this).attr("data-json"));
+        var marker_json = $(this).attr("data-json");
+        if (!marker_json == "")
+        {
+            handler[index] = Gmaps.build('Google');
+            var that = this;
+            console.log($(that).attr("id"));
+            handler[index].buildMap({provider: {}, internal: {id: $(that).attr("id")}}, function () {
+                markers = handler[index].addMarker(jQuery.parseJSON(marker_json));
+//            markers = handler.addMarkers([
+//                {
+//                    "lat": 0,
+//                    "lng": 0,
+//                    "picture": {
+//                        "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+//                        "width": 32,
+//                        "height": 32
+//                    },
+//                    "infowindow": "hello!"
+//                }
+//            ]);
+                handler[index].bounds.extendWith(markers);
+                handler[index].fitMapToBounds();
+                handler[index].getMap().setZoom(15);
+            });
+        }
+
+    });
+
 }
 
 function remove_white_space(image)

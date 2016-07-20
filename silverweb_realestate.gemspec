@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.2.6"
   s.add_dependency 'silverweb_cms'
+  s.add_dependency 'gmaps4rails'
   s.add_dependency 'rets'
 end
